@@ -30,7 +30,7 @@ const CartProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     async function loadProducts(): Promise<void> {
-      const loadedCart = await AsyncStorage.getItem('@GoMarket:cart');
+      const loadedCart = await AsyncStorage.getItem('@GoMarket:products');
 
       if (loadedCart) {
         const allProducts = JSON.parse(loadedCart);
@@ -41,108 +41,65 @@ const CartProvider: React.FC = ({ children }) => {
     loadProducts();
   }, []);
 
-  const addToCart = useCallback(async (product: Product) => {
-    const loadedCart = await AsyncStorage.getItem('@GoMarket:cart');
+  const addToCart = useCallback(
+    async (product: Product) => {
+      const productInCart = products.find(p => p.id === product.id);
 
-    if (loadedCart) {
-      const parsedCart = JSON.parse(loadedCart);
-
-      const productIndex = parsedCart.findIndex(
-        (productInCart: Product) => productInCart.id === product.id,
-      );
-
-      if (productIndex < 0) {
-        const newCart = [
-          ...parsedCart,
-          {
-            id: product.id,
-            image_url: product.image_url,
-            price: product.price,
-            title: product.title,
-            quantity: 1,
-          },
-        ];
-
-        await AsyncStorage.setItem('@GoMarket:cart', JSON.stringify(newCart));
-
-        setProducts(newCart);
+      if (productInCart) {
+        setProducts(
+          products.map(p =>
+            p.id === product.id ? { ...p, quantity: p.quantity + 1 } : p,
+          ),
+        );
       } else {
-        parsedCart.splice(productIndex, 1, {
-          id: parsedCart[productIndex].id,
-          image_url: parsedCart[productIndex].image_url,
-          price: parsedCart[productIndex].price,
-          title: parsedCart[productIndex].title,
-          quantity: parsedCart[productIndex].quantity + 1,
-        });
-
-        await AsyncStorage.setItem(
-          '@GoMarket:cart',
-          JSON.stringify(parsedCart),
-        );
-        setProducts(parsedCart);
+        setProducts([...products, { ...product, quantity: 1 }]);
       }
-    }
-  }, []);
 
-  const increment = useCallback(async id => {
-    const loadedCart = await AsyncStorage.getItem('@GoMarket:cart');
+      await AsyncStorage.setItem(
+        '@GoMarket:products',
+        JSON.stringify(products),
+      );
+    },
+    [products],
+  );
 
-    if (loadedCart) {
-      const parsedCart = JSON.parse(loadedCart);
-
-      const productIndex = parsedCart.findIndex(
-        (product: Product) => product.id === id,
+  const increment = useCallback(
+    async id => {
+      setProducts(
+        products.map(p =>
+          p.id === id ? { ...p, quantity: p.quantity + 1 } : p,
+        ),
       );
 
-      parsedCart.splice(productIndex, 1, {
-        id: parsedCart[productIndex].id,
-        image_url: parsedCart[productIndex].image_url,
-        price: parsedCart[productIndex].price,
-        title: parsedCart[productIndex].title,
-        quantity: parsedCart[productIndex].quantity + 1,
-      });
-
-      await AsyncStorage.setItem('@GoMarket:cart', JSON.stringify(parsedCart));
-      setProducts(parsedCart);
-    }
-  }, []);
-
-  const decrement = useCallback(async id => {
-    const loadedCart = await AsyncStorage.getItem('@GoMarket:cart');
-
-    if (loadedCart) {
-      const parsedCart = JSON.parse(loadedCart);
-
-      const productIndex = parsedCart.findIndex(
-        (product: Product) => product.id === id,
+      await AsyncStorage.setItem(
+        '@GoMarket:products',
+        JSON.stringify(products),
       );
+    },
+    [products],
+  );
 
-      if (parsedCart[productIndex].quantity === 1) {
-        const newCart = parsedCart.filter(
-          (product: Product) => product.id !== id,
-        );
+  const decrement = useCallback(
+    async id => {
+      const productIndex = products.findIndex(p => p.id === id);
 
-        await AsyncStorage.setItem('@GoMarket:cart', JSON.stringify(newCart));
-
-        setProducts(newCart);
+      if (products[productIndex].quantity === 1) {
+        setProducts(products.filter(p => p.id !== id));
       } else {
-        parsedCart.splice(productIndex, 1, {
-          id: parsedCart[productIndex].id,
-          image_url: parsedCart[productIndex].image_url,
-          price: parsedCart[productIndex].price,
-          title: parsedCart[productIndex].title,
-          quantity: parsedCart[productIndex].quantity - 1,
-        });
-
-        await AsyncStorage.setItem(
-          '@GoMarket:cart',
-          JSON.stringify(parsedCart),
+        setProducts(
+          products.map(p =>
+            p.id === id ? { ...p, quantity: p.quantity - 1 } : p,
+          ),
         );
-
-        setProducts(parsedCart);
       }
-    }
-  }, []);
+
+      await AsyncStorage.setItem(
+        '@GoMarket:products',
+        JSON.stringify(products),
+      );
+    },
+    [products],
+  );
 
   const value = React.useMemo(
     () => ({ addToCart, increment, decrement, products }),
