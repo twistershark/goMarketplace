@@ -2,26 +2,26 @@
   "products": [
     {
       "id": "123",
-      "title": "Nome do produto 01",
-      "image_url": "https://storage.googleapis.com/golden-wind/bootcamp-gostack/camiseta-ecommerce.jpg",
+      "title": "Galaxy S10 256GB",
+      "image_url": "https://www.casasbahia-imagens.com.br/TelefoneseCelulares/Smartphones/Android/14817287/1087842937/smartphone-samsung-galaxy-s10-branco-128gb-8gb-ram-tela-infinita-de-6-1-camera-traseira-tripla-dual-chip-powershare-leitor-digital-android-9-0-14817287.jpg",
       "price": 50
     },
     {
       "id": "1234",
-      "title": "Nome do produto 02",
-      "image_url": "https://storage.googleapis.com/golden-wind/bootcamp-gostack/camiseta-ecommerce.jpg",
+      "title": "iPhone XR 128GB",
+      "image_url": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-xr-blue-select-201809?wid=441&hei=529&fmt=jpeg&qlt=95&op_usm=0.5,0.5&.v=1565209264208",
       "price": 60
     },
     {
       "id": "12345",
-      "title": "Nome do produto 03",
-      "image_url": "https://storage.googleapis.com/golden-wind/bootcamp-gostack/camiseta-ecommerce.jpg",
+      "title": "LG Gram 2018",
+      "image_url": "https://www.lg.com/br/images/computadores/md05949297/gallery/medium01.jpg",
       "price": 70
     },
     {
       "id": "123456",
-      "title": "Nome do produto 04",
-      "image_url": "https://storage.googleapis.com/golden-wind/bootcamp-gostack/camiseta-ecommerce.jpg",
+      "title": "MacBook Pro 2019",
+      "image_url": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mbp16touch-space-select-201911?wid=892&hei=820&&qlt=80&.v=1572825197207",
       "price": 80
     }
   ]

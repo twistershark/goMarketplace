@@ -4,6 +4,7 @@ import { FlatList } from 'react-native';
 export const Container = styled.SafeAreaView`
   flex: 1;
   align-items: center;
+  background: #042d36;
 `;
 
 export const ProductContainer = styled.View`
@@ -60,7 +61,7 @@ export const ProductPrice = styled.Text`
   margin-top: 5px;
 
   font-size: 16px;
-  color: #e83f5b;
+  color: #208ea6;
 `;
 
 export const ProductQuantity = styled.Text`
@@ -69,7 +70,7 @@ export const ProductQuantity = styled.Text`
   margin-right: 10px;
 
   font-size: 16px;
-  color: #e83f5b;
+  color: #208ea6;
 `;
 
 export const ActionContainer = styled.View`
@@ -81,7 +82,7 @@ export const ActionContainer = styled.View`
 `;
 
 export const ActionButton = styled.TouchableOpacity`
-  background: rgba(232, 63, 91, 0.1);
+  background: rgba(32, 142, 166, 0.1);
   border-radius: 5px;
   padding: 12px;
   margin-bottom: 5px;
@@ -92,7 +93,7 @@ export const TotalProductsContainer = styled.View`
   bottom: 0px;
 
   flex-direction: row;
-  background: #e83f5b;
+  background: #208ea6;
 
   padding: 20px 40px;
   justify-content: space-between;

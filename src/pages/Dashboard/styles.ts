@@ -11,6 +11,7 @@ interface Product {
 export const Container = styled.SafeAreaView`
   flex: 1;
   align-items: center;
+  background: #042d36;
 `;
 
 export const ProductContainer = styled.View`
@@ -59,7 +60,7 @@ export const PriceContainer = styled.View`
 export const ProductPrice = styled.Text`
   font-weight: bold;
   font-size: 16px;
-  color: #e83f5b;
+  color: #208ea6;
 `;
 
 export const ProductButton = styled.TouchableOpacity``;
